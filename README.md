@@ -1,29 +1,29 @@
-### 运行代码
-对于仿真数据，确保数据集内部使用编号开头，比如data_large2的组织形式：\${id}_clone\${i}_error\${j}，可以通过编号快速运行。比如在仿真数据data_large2上运行0号数据集（0_clone6_error0.4）则使用以下代码：
+### Run the code
+For simulation data, make sure the dataset starts with a number, such as data_large2：\${id}_clone\${i}_error\${j}, which can be run quickly by number. For example, to run dataset 0 (0_clone6_error0.4) on the simulated data data_large2, use the following code:
 
 ```python
 python train.py \
-    --data_dir ../data/data_large2 \ # 仿真文件夹路径
-    --dataset_id 0 \                 # 仿真数据编号，0为访问该文件夹中以编号0作为开头的数据集
-    --output_dir results_leiden \    # 输出文件夹名，内部按照仿真编号存储训练过程与结果
+    --data_dir ../data/data_large2 \ # The path of simulation folder
+    --dataset_id 0 \                 # Simulation data number, 0 is to access the dataset starting with number 0 in this folder
+    --output_dir results_leiden \    # Output folder name, internally store the training process and results according to the simulation number
 ```
-其余参数可以使用默认值。
+The remaining parameters can use the default values.
 
-对于真实数据，即无法获取真实标签的数据集，通过文件名访问数据：
+For real data, datasets for which real labels cannot be obtained, access the data by file name：
 ```python
 python train.py \
-    --data_dir ../data/lineage_trace_data/lineage_trace_data/ \ # 文件夹
-    --data_name c17_CNV \                                       # 文件名
-    --output_dir result_lin \                                   # 输出地址
+    --data_dir ../data/lineage_trace_data/lineage_trace_data/ \ # The path of folder
+    --data_name c17_CNV \                                       # Folder name
+    --output_dir result_lin \                                   # The path of output
     --eval_mode 
 ```
 
-注意仿真数据为tsv格式，真实数据为csv格式。如果将仿真数据转化为csv，则也可以使用第二种方法访问。
+Note that the simulation data is in tsv format, and the real data is in csv format. If the simulation data is converted to csv, you can also use the second method to access.
 
-### 查看实验结果
-* 训练过程：通过tensorboard查看
-* 实验结果：训练结束后，在输出文件夹中可以找到以下输出内容：
-    * cell2cluster.csv：每个细胞所属类别编号
-    * tree_path.csv： 树的生成路径，其中每行左边为父节点，右边为子节点，使用深度优先算法存储
-    * tree.png：生成树示意图
+### View the experimental results
+* Training process：View through tensorboard
+* Results：After the training is completed, the following output can be found in the output folder：
+    * cell2cluster.csv：The category number to which each cell belongs.
+    * tree_path.csv： The tree generation path, where each row has a parent node on the left and a child node on the right, stored using a depth-first algorithm,
+    * tree.png：Schematic diagram of a spanning tree.
 
